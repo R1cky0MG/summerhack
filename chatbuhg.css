@@ -15,7 +15,7 @@
     body {
       display: flex;
       flex-direction: column;
-      background: #b9f6e4;
+      background: #7eb4f3;
     }
 /* ====== Навигация ====== */
 .navbar, .chat-header {
@@ -23,7 +23,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 15px 25px;
-  background: #a0f0d0;
+  background: #a0c3f0;
   border-bottom: 1px solid #ddd;
 }
 
@@ -50,7 +50,7 @@ nav a:hover {
       justify-content: space-between;
       align-items: center;
       padding: 15px 25px;
-      background: #a0f0d0;
+      background: #a9c0f1;
       border-bottom: 1px solid #ddd;
       height: 60px;
       flex-shrink: 0;
@@ -204,7 +204,7 @@ nav a:hover {
 
     .chat-area {
       flex: 1;
-      background: #b9f6e4;
+      background: #b9d1f6;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -249,7 +249,7 @@ nav a:hover {
     }
 
     .suggestions button:hover {
-      background: #e5f8f2;
+      background: #8799e7;
     }
 
     .input-area {
@@ -275,22 +275,21 @@ nav a:hover {
       cursor: pointer;
       font-size: 18px;
     }
+ nav {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
 
-    nav {
-      display: flex;
-      align-items: center;
-      gap: 0;
-    }
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
 
-    .dropdown {
-      position: relative;
-      display: inline-block;
-    }
-
-    .dropdown-toggle {
-      cursor: pointer;
-      position: relative;
-    }
+.dropdown-toggle {
+  cursor: pointer;
+  position: relative;
+}
 
 .dropdown-menu {
   display: none;
@@ -316,19 +315,21 @@ nav a:hover {
   border-radius: 8px;
   font-size: 15px;
   transition: background 0.2s;
+  text-align: center; /* выравнивание текста по центру */
 }
-    .dropdown-menu a:hover {
-      background: #e5f8f2;
-    }
 
-    .dropdown:hover .dropdown-menu,
-    .dropdown:focus-within .dropdown-menu {
-      display: flex;
-    }
+.dropdown-menu a:hover {
+  background: #e5f8f2;
+}
 
-    .dropdown-toggle::after {
-      content: " ▼";
-      font-size: 11px;
-      color: #555;
-      vertical-align: middle;
-    }
+.dropdown:hover .dropdown-menu,
+.dropdown:focus-within .dropdown-menu {
+  display: flex;
+}
+
+.dropdown-toggle::after {
+  content: " ▼";
+  font-size: 11px;
+  color: #555;
+  vertical-align: middle;
+}
