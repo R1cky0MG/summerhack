@@ -26,7 +26,7 @@ function askQuestion() {
           {
             role: "system",
             content:
-              "Ești un asistent juridic AI specializat în legislația Republicii Moldova pentru afaceri mici.i",
+              "Ești un asistent juridic AI specializat în legislația Republicii Moldova pentru afaceri mici.",
           },
           { role: "user", content: question },
         ],

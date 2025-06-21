@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Чат – ЮрГид</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="../style/chatjur.css" />
   <script defer src="script.js"></script>
 </head>
 <body>
@@ -21,31 +21,35 @@
     <button class="login-btn">Log In</button>
   </header>
 
-  <div class="chat-layout">
+   <div class="chat-layout">
     <aside class="sidebar">
-      <button class="new-chat-btn">+ Начать чат</button>
-      <input class="search-input" placeholder="Поиск..." />
-
-      <div class="recent-chats">
-        <h4>Недавние чаты</h4>
-        <ul>
-          <li>Как зарегистрировать ИП?</li>
-          <li>Претензия арендодателю</li>
-          <li>Договор поставки</li>
-          <li>НДФЛ-отчет</li>
-          <li>Заявка на товарный знак</li>
-          <li>Соглашение о расторжении</li>
-        </ul>
+      <div class="sidebar-scroll">
+        <button class="new-chat-btn">+ Начать чат</button>
+        <input class="search-input" placeholder="Поиск..." />
+        <div class="category">
+          <h4>Чаты</h4>
+          <ul>
+            <li>Регистрация и структура бизнеса</li>
+            <li>Контракты и соглашения</li>
+            <li>Кадровые документы</li>
+            <li>Защита прав</li>
+            <li>Как зарегистрировать ИП?</li>
+            <li>Претензия арендодателю</li>
+            <li>Договор поставки</li>
+            <li>НДФЛ-отчет</li>
+            <li>Заявка на товарный знак</li>
+            <li>Соглашение о расторжении</li>
+          </ul>
+        </div>
       </div>
-
       <div class="profile">
         <button>👤 User Profile</button>
       </div>
     </aside>
 
     <main class="chat-area">
+      <div class="chat-title">Спроси ЮрГида</div>
       <div class="chat-main">
-        <h2>Спроси ЮрГида</h2>
         <div class="suggestions">
           <button>Что ты можешь делать?</button>
           <button>Какой проект самый успешный?</button>
@@ -58,202 +62,6 @@
       </div>
     </main>
   </div>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
-
-* {
-  box-sizing: border-box;
-  font-family: 'Inter', sans-serif;
-  margin: 0;
-  padding: 0;
-}
-
-body, html {
-  height: 100%;
-  background: #b9f6e4;
-}
-
-/* ====== Навигация ====== */
-.navbar, .chat-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 25px;
-  background: #a0f0d0;
-  border-bottom: 1px solid #ddd;
-}
-
-.logo {
-  font-weight: bold;
-  font-size: 18px;
-}
-
-nav a {
-  margin-left: 20px;
-  text-decoration: none;
-  color: #222;
-  font-weight: 500;
-  padding: 6px 14px;
-  border-radius: 20px;
-  transition: background 0.3s, color 0.3s;
-}
-
-nav a:hover {
-  background: rgba(255, 255, 255, 0.4);
-}
-
-.login-btn {
-  background: white;
-  border: none;
-  border-radius: 20px;
-  padding: 8px 16px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.login-btn:hover {
-  background: #f0f0f0;
-}
-
-/* ====== Чат Layout ====== */
-.chat-layout {
-  display: flex;
-  height: calc(100vh - 60px);
-}
-
-/* ====== Sidebar ====== */
-.sidebar {
-  background: #2e3f39;
-  color: white;
-  width: 260px;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  border-top-right-radius: 20px;
-}
-
-.sidebar input,
-.new-chat-btn {
-  padding: 10px;
-  border-radius: 10px;
-  border: none;
-  margin-bottom: 15px;
-}
-
-.new-chat-btn {
-  background: #f0f0f0;
-  color: #333;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.sidebar h4 {
-  margin: 20px 0 10px;
-  font-weight: 600;
-}
-
-.sidebar ul {
-  list-style: none;
-  padding-left: 0;
-}
-
-.sidebar li {
-  margin: 6px 0;
-  padding: 5px;
-  cursor: pointer;
-  border-radius: 8px;
-  transition: background 0.2s;
-}
-
-.sidebar li:hover {
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.profile button {
-  margin-top: auto;
-  padding: 8px 14px;
-  background: white;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 14px;
-}
-
-/* ====== Чат Контент ====== */
-.chat-area {
-  flex: 1;
-  background: #b9f6e4;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 40px 20px;
-}
-
-.chat-main h2 {
-  font-size: 24px;
-  margin-bottom: 20px;
-  font-weight: 600;
-  text-align: center;
-}
-
-.suggestions {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-bottom: 30px;
-}
-
-.suggestions button {
-  padding: 10px 16px;
-  border: none;
-  border-radius: 12px;
-  background: white;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.suggestions button:hover {
-  background: #e5f8f2;
-}
-
-.input-area {
-  display: flex;
-  width: 100%;
-  max-width: 600px;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
-}
-
-.input-area input {
-  flex: 1;
-  padding: 12px 14px;
-  border: none;
-  font-size: 14px;
-}
-
-.input-area button {
-  width: 50px;
-  background: #222;
-  color: white;
-  border: none;
-  cursor: pointer;
-  font-size: 18px;
-}
-
-.recent-chats {
-  max-height: 150px;
-  overflow-y: auto;
-  padding-right: 5px;
-  margin-bottom: 20px;
-}
-
-  </style>
+ 
 </body>
 </html>
