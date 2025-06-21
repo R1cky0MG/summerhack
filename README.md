@@ -1,2 +1,2 @@
-# summerhack
-summer hackaton
+# Accoutsel
+Our project is created for small businesses, helping them navigate the legal parts and accounting aspects of doing business more easily. AI helps to find the necessary documents to obtain a license, permits and certificates, and also, based on fiscal documents and company expenses, it creates a csv document for a clear understanding of the company's budget waste. Also, our platform saves user documents and hashes them.
