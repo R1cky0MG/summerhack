@@ -1,4 +1,4 @@
-/* Базовые настройки */
+/* ======= Базовые стили ======= */
 * {
   box-sizing: border-box;
   font-family: 'Inter', sans-serif;
@@ -7,13 +7,13 @@
 }
 
 body, html {
-  height: 100%;
+  min-height: 100%;
   background: #b9f6e4;
   display: flex;
   flex-direction: column;
 }
 
-/* ====== Навигация ====== */
+/* ======= Навигация ======= */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -21,7 +21,7 @@ body, html {
   padding: 15px 25px;
   background: #a0f0d0;
   border-bottom: 1px solid #ddd;
-  
+  flex-wrap: wrap;
 }
 
 .logo {
@@ -29,20 +29,77 @@ body, html {
   font-size: 18px;
 }
 
-nav a {
-  margin-left: 20px;
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.nav-links a,
+.dropdown-toggle {
   text-decoration: none;
   color: #222;
   font-weight: 500;
   padding: 6px 14px;
   border-radius: 20px;
-  transition: background 0.3s, color 0.3s;
+  transition: background 0.3s;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
 }
 
-nav a:hover {
+.nav-links a:hover,
+.dropdown-toggle:hover {
   background: rgba(255, 255, 255, 0.4);
 }
 
+/* ======= Dropdown ======= */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-toggle::after {
+  content: " ▼";
+  font-size: 10px;
+  margin-left: 4px;
+  color: #444;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 110%;
+  left: 0;
+  min-width: 140px;
+  background: #fff;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  border-radius: 12px;
+  flex-direction: column;
+  padding: 8px 0;
+  z-index: 100;
+}
+
+.dropdown-menu a {
+  color: #222;
+  padding: 10px 16px;
+  text-decoration: none;
+  display: block;
+  border-radius: 8px;
+  transition: background 0.2s;
+  font-size: 15px;
+}
+
+.dropdown-menu a:hover {
+  background: #e5f8f2;
+}
+
+.dropdown:hover .dropdown-menu,
+.dropdown:focus-within .dropdown-menu {
+  display: flex;
+}
+
+/* ======= Кнопка входа ======= */
 .login-btn {
   background: white;
   border: none;
@@ -57,7 +114,7 @@ nav a:hover {
   background: #f0f0f0;
 }
 
-/* ====== Форма ====== */
+/* ======= Форма ======= */
 .form-wrapper {
   background: white;
   padding: 30px;

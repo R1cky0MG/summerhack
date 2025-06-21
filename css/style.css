@@ -128,21 +128,7 @@
       position: relative;
     }
 
-    .dropdown-menu {
-      display: none;
-      position: absolute;
-      top: 110%;
-      left: 50%;
-      transform: translateX(-50%);
-      min-width: 140px;
-      background: #fff;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-      border-radius: 12px;
-      z-index: 100;
-      flex-direction: column;
-      padding: 8px 0;
-      text-align: center;
-    }
+    
 
     .dropdown-menu a {
       color: #222;
@@ -153,6 +139,20 @@
       font-size: 15px;
       transition: background 0.2s;
     }
+    .dropdown-menu {
+  position: absolute;
+  top: 110%; /* чуть ниже кнопки */
+  left: 0;   /* выравнивание по левому краю родителя */
+  min-width: 140px;
+  background: #fff;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  border-radius: 12px;
+  display: none;
+  flex-direction: column;
+  padding: 8px 0;
+  z-index: 100;
+}
+
 
     .dropdown-menu a:hover {
       background: #e5f8f2;
