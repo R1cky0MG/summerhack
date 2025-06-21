@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Регистрация</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/register.css" />
+  
+  
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="logo">⚑ ЮрГид</div>
+    <nav>
+      <a href="../index.html">Home</a>
+      <div class="dropdown">
+        <a href="#" class="dropdown-toggle">Chats</a>
+        <div class="dropdown-menu">
+          <a href="../chatbuhg.html">Бухгалтер</a>
+          <a href="../chatjur.html">Юрист</a>
+        </div>
+      </div>
+      <a href="#">Profile</a>
+      <a href="#">How It Works</a>
+      <a href="#">About Us</a>
+    </nav>
+    <a class="login-btn" href="../register/registrstion.html">Log In</a>
+  </header>
+
+  <div class="form-wrapper">
+    <h2>Регистрация бизнеса</h2>
+    <form>
+      <label for="fullName">ФИО *</label>
+      <input type="text" id="fullName" name="fullName" required />
+
+      <label for="email">Email *</label>
+      <input type="email" id="email" name="email" required />
+
+      <label for="businessName">Название бизнеса *</label>
+      <input type="text" id="businessName" name="businessName" required />
+
+      <label for="industry">Область бизнеса *</label>
+      <select id="industry" name="industry" required>
+        <option value="">Выберите</option>
+        <option value="it">IT</option>
+        <option value="law">Юриспруденция</option>
+        <option value="marketing">Маркетинг</option>
+        <option value="education">Образование</option>
+        <option value="other">Другое</option>
+      </select>
+
+      <label for="description">Краткое описание</label>
+      <textarea id="description" name="description" placeholder="Расскажите кратко о вашем бизнесе..."></textarea>
+
+       <a href="success.html"><button type="submit">Зарегистрироваться</button></a>
+    </form>
+  </div>
+
+</body>
+</html>
