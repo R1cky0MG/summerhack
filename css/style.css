@@ -116,3 +116,56 @@
     .bubble5 { width: 40px; height: 40px; background: #0e0f1b; top: 200px; right: 140px; }
     .bubble6 { width: 40px; height: 40px; background: #d3e2f7; bottom: 100px; left: 200px; }
     .bubble7 { width: 40px; height: 40px; background: #fff; bottom: 80px; right: 220px; }
+
+      /* Выпадающее меню */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-toggle {
+      cursor: pointer;
+      position: relative;
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 110%;
+      left: 50%;
+      transform: translateX(-50%);
+      min-width: 140px;
+      background: #fff;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+      border-radius: 12px;
+      z-index: 100;
+      flex-direction: column;
+      padding: 8px 0;
+      text-align: center;
+    }
+
+    .dropdown-menu a {
+      color: #222;
+      padding: 10px 0;
+      text-decoration: none;
+      display: block;
+      border-radius: 8px;
+      font-size: 15px;
+      transition: background 0.2s;
+    }
+
+    .dropdown-menu a:hover {
+      background: #e5f8f2;
+    }
+
+    .dropdown:hover .dropdown-menu,
+    .dropdown:focus-within .dropdown-menu {
+      display: flex;
+    }
+
+    .dropdown-toggle::after {
+      content: " ▼";
+      font-size: 11px;
+      color: #555;
+      vertical-align: middle;
+    }
