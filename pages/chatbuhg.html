@@ -261,19 +261,27 @@ const openai = new OpenAI({
 </head>
 <body>
   <header class="navbar">
-    <div class="logo">⚑ Buhguide</div>
-    <nav>
-      <a href="index.html">Acasă</a>
-      <a href="chat.html">JurGid</a>
-      <a href="chatContabil.html">ConGid</a>
-      <a href="#">Profil</a>
-      <a href="#">Cum funcționează</a>
-      <a href="#">Despre noi</a>
-    </nav>
-    <a href="../register/registration.html">
-  <button class="login-btn">Log In</button>
-</a>
-  </header>
+  <div class="logo" style="display: flex; align-items: center;">
+    <a href="../index.html" style="display: flex; align-items: center; text-decoration: none;">
+      <img src="../img/logo.png" alt="Логотип" style="height: 60px; margin-right: 10px;">
+      <span style="font-size: 24px; font-weight: bold; color: #1b3c7e;">Accountsel</span>
+    </a>
+  </div>
+  <nav>
+    <a href="../index.html">Home</a>
+    <div class="dropdown">
+      <a href="#" class="dropdown-toggle">Chats</a>
+      <div class="dropdown-menu">
+        <a href="../pages/chatbuhg.html">Бухгалтер</a>
+        <a href="../pages/chatjur.html">Юрист</a>
+      </div>
+    </div>
+    <a href="#">Profile</a>
+    <a href="#">How It Works</a>
+    <a href="#">About Us</a>
+  </nav>
+  <a class="login-btn" href="../register/registration.html">Log In</a>
+</header>
 
   <div class="chat-layout">
     <aside class="sidebar">

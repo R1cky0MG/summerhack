@@ -6,9 +6,9 @@
     }
 
     body, html {
-      height: 100%;
-      background: #b9f6e4;
-    }
+  height: 100%;
+  background: #b9d1f6; /* пастельный синий */
+}
 
     /* ====== Навигация ====== */
     .navbar {
@@ -16,8 +16,8 @@
       justify-content: space-between;
       align-items: center;
       padding: 15px 25px;
-      background: #a0f0d0;
-      border-bottom: 1px solid #ddd;
+      background: #7eb4f3; /* насыщенный синий */
+      border-bottom: 1px solid #184077;
     }
 
     .logo {
@@ -25,10 +25,14 @@
       font-size: 18px;
     }
 
+    .logo span {
+  color: #1b3c7e;
+}
+
     nav a {
       margin-left: 20px;
       text-decoration: none;
-      color: #222;
+      color: #184077; /* глубокий синий для текста */
       font-weight: 500;
       padding: 6px 14px;
       border-radius: 20px;
@@ -36,52 +40,59 @@
     }
 
     nav a:hover {
-      background: rgba(255, 255, 255, 0.4);
+      background: #e3edfa; /* светло-синий при наведении */
     }
 
     .login-btn {
-      background: white;
+      background: #7eb4f3; /* синий */
       border: none;
       border-radius: 20px;
       padding: 8px 16px;
       font-weight: 500;
       cursor: pointer;
       transition: background 0.2s;
+      color: #fff;
     }
 
     .login-btn:hover {
-      background: #f0f0f0;
+      background: #184077; /* глубокий синий при наведении */
+      color: #fff;
     }
 
     /* ====== Hero Section ====== */
     .hero {
-      background-color: #3bd6a4;
+      background-color: #b9d1f6;
       height: 100vh;
       padding: 100px 20px;
       text-align: center;
       position: relative;
-      color: white;
+      color: #184077;
       overflow: hidden;
     }
+    .hero h1,
+.hero p,
+.hero .cta {
+  color: #184077; /* тёмно-синий */
+}
 
     .hero h1 {
-      font-size: 42px;
-      margin-bottom: 20px;
-      font-weight: 600;
+      font-size: 56px;    /* было 42px, стало крупнее */
+      margin-bottom: 24px;
+      font-weight: 700;
     }
 
     .hero p {
-      font-size: 18px;
-      max-width: 500px;
-      margin: 0 auto 30px;
-      color: #f0f0f0;
+      font-size: 26px;    /* было 18px, стало крупнее */
+      max-width: 700px;
+      margin: 0 auto 36px;
+      color: #184077;
     }
 
     .cta {
-      padding: 12px 24px;
-      font-size: 14px;
-      border-radius: 20px;
-      border: 1px solid white;
+      padding: 16px 36px;
+      font-size: 22px;    /* было 14px, стало крупнее */
+      border-radius: 24px;
+      border: 1.5px solid white;
       background: transparent;
       color: white;
       cursor: pointer;

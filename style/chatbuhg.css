@@ -15,7 +15,7 @@ html, body {
 body {
   display: flex;
   flex-direction: column;
-  background: #7eb4f3; /* culoarea ta de fundal */
+  background: #b9d1f6; /* pastelsky blue */
 }
 
 /* ====== Навигация ====== */
@@ -24,7 +24,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 15px 25px;
-  background: #a0c3f0; /* culoarea ta */
+  background: #7eb4f3; /* насыщенный синий */
   border-bottom: 1px solid #ddd;
 }
 
@@ -36,7 +36,7 @@ body {
 nav a {
   margin-left: 20px;
   text-decoration: none;
-  color: #222;
+  color: #184077;
   font-weight: 500;
   padding: 6px 14px;
   border-radius: 20px;
@@ -44,18 +44,19 @@ nav a {
 }
 
 nav a:hover {
-  background: rgba(255, 255, 255, 0.4);
+  background: #e3edfa;
 }
 
 .navbar {
   height: 60px;
   flex-shrink: 0;
-  background: #a9c0f1; /* culoarea ta */
-  border-bottom: 1px solid #ddd;
+  background: #7eb4f3; /* насыщенный синий */
+  border-bottom: 1px solid #184077;
 }
 
 .login-btn {
-  background: white;
+  background: #7eb4f3;
+  color: #fff;
   border: none;
   border-radius: 20px;
   padding: 8px 16px;
@@ -65,7 +66,8 @@ nav a:hover {
 }
 
 .login-btn:hover {
-  background: #f0f0f0;
+  background: #184077;
+  color: #fff;
 }
 
 .chat-layout {
