@@ -1,64 +1,310 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ro">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Чат – Гид</title>
+  <title>Chat – JurGhid</title>
+  <link rel="stylesheet" href="../style/chatbuhg.css" />
+  
+  <style>
+    /* Containerul input-ului */
+    #input-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 15px;
+      border-top: 1px solid #ccc;
+      background-color: #fafafa;
+      width: 100%; /* Make the input area wider */
+    }
+  
+    /* Textarea stilizat */
+    #intrebare {
+      flex: 1;
+      resize: vertical;
+      min-height: 50px;
+      max-height: 120px;
+      padding: 12px 15px;
+      font-size: 1rem;
+      border-radius: 12px;
+      border: 1.5px solid #ddd;
+      font-family: 'Inter', sans-serif;
+      transition: border-color 0.3s ease;
+    }
+  
+    #intrebare:focus {
+      outline: none;
+      border-color: #0d6efd;
+      box-shadow: 0 0 5px rgba(13, 110, 253, 0.5);
+    }
+  
+    /* Input upload imagine - stil minimalist */
+    #image-upload {
+      cursor: pointer;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      padding: 6px 10px;
+      background: white;
+      font-size: 0.9rem;
+      transition: background-color 0.3s ease;
+    }
+  
+    #image-upload:hover {
+      background-color: #e7f1ff;
+    }
+  
+    /* Butoane trimite, trimite text OCR și export CSV */
+    #send-btn, #send-ocr-text-btn, #export-ai-csv-btn {
+      padding: 10px 18px;
+      background-color: #0d6efd;
+      border: none;
+      border-radius: 12px;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      font-family: 'Inter', sans-serif;
+      white-space: nowrap;
+    }
+  
+    #send-btn:hover, #send-ocr-text-btn:hover, #export-ai-csv-btn:hover {
+      background-color: #0846a1;
+    }
+  
+    #send-ocr-text-btn, #export-ai-csv-btn {
+      font-size: 0.85rem;
+    }
+  
+    /* Butonul trimite text extras din imagine va fi ascuns implicit */
+    #send-ocr-text-btn {
+      display: none;
+    }
+  
+    /* Pentru un aspect curat pe mobil */
+    @media (max-width: 600px) {
+      #input-area {
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      #send-btn, #send-ocr-text-btn, #export-ai-csv-btn {
+        flex: 1 1 100%;
+        font-size: 1rem;
+      }
+      #image-upload {
+        flex: 1 1 100%;
+      }
+    }
+  </style>
+  
+  
+  
+  <script defer src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/tesseract.js@4.0.2/dist/tesseract.min.js"></script>
+  <script defer type="module">
+    import OpenAI from "https://cdn.jsdelivr.net/npm/openai@4.30.0/+esm";
+    import dotenv from 'dotenv';
+  dotenv.config();
 
-  <link rel="stylesheet" href="/style/chatbuhg.css" />
 
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+
+    let ocrTextExtracted = "";
+    let lastAiResponse = "";
+
+    const messages = [
+      {
+        role: "system",
+        content:
+          "Ești un asistent contabil AI specializat în contabilitatea din Republica Moldova pentru afaceri mici. Cand utilizatorul iti trimite ceva date tu ii vei raspunde cu ele sub forma de tabel cu cat mai putin text adaugator.",
+      }
+    ];
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const chatContainer = document.getElementById("chat");
+      const textarea = document.getElementById("intrebare");
+      const imageUpload = document.getElementById("image-upload");
+      const sendBtn = document.getElementById("send-btn");
+      const sendOcrBtn = document.getElementById("send-ocr-text-btn");
+      const exportAiCsvBtn = document.getElementById("export-ai-csv-btn");
+
+      // Funcție pentru afișare mesaj în chat
+      function appendMessage(text, type) {
+        const msg = document.createElement("div");
+        msg.className = `message ${type}`;
+        if(type === "ai"){
+          msg.innerHTML = marked.parse(text);
+        } else {
+          msg.textContent = text;
+        }
+        chatContainer.appendChild(msg);
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+      }
+
+      // Funcție pentru afișare imagine încărcată în chat
+      function appendImageMessage(imageSrc, type) {
+        const msg = document.createElement("div");
+        msg.className = `message ${type}`;
+
+        const img = document.createElement("img");
+        img.src = imageSrc;
+        msg.appendChild(img);
+        chatContainer.appendChild(msg);
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+      }
+
+      // Funcție de trimitere mesaj către OpenAI
+      async function sendMessage(manualQuestion) {
+        const question = manualQuestion ?? textarea.value.trim();
+        if (!question) return;
+
+        appendMessage(question, "user");
+        if (!manualQuestion) textarea.value = "";
+        appendMessage("_Se scrie răspunsul..._", "ai");
+
+        try {
+          messages.push({ role: "user", content: question });
+
+          const response = await openai.chat.completions.create({
+            model: "gpt-4o-mini",
+            messages: messages,
+          });
+
+          const typingMsg = Array.from(chatContainer.querySelectorAll(".ai")).pop();
+          if (typingMsg) typingMsg.remove();
+
+          const answer = response.choices[0].message.content;
+          messages.push({ role: "assistant", content: answer });
+          appendMessage(answer, "ai");
+
+          lastAiResponse = answer;
+        } catch (err) {
+          const typingMsg = Array.from(chatContainer.querySelectorAll(".ai")).pop();
+          if (typingMsg) typingMsg.remove();
+          appendMessage("⚠️ Eroare la conectarea cu AI-ul.", "ai");
+          console.error(err);
+        }
+      }
+
+      // Evenimente
+      sendBtn.addEventListener("click", () => sendMessage());
+      textarea.addEventListener("keypress", (e) => {
+        if (e.key === "Enter" && !e.shiftKey) {
+          e.preventDefault();
+          sendMessage();
+        }
+      });
+
+      sendOcrBtn.addEventListener("click", () => {
+        if (!ocrTextExtracted) return;
+        sendMessage(ocrTextExtracted);
+        sendOcrBtn.style.display = "none";
+        ocrTextExtracted = "";
+      });
+
+      exportAiCsvBtn.addEventListener("click", () => {
+        if (!lastAiResponse.trim()) {
+          alert("⚠️ Nu există un răspuns AI de exportat.");
+          return;
+        }
+        downloadCSVFromText(lastAiResponse);
+      });
+
+      imageUpload.addEventListener("change", async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = async function(event) {
+          const imageDataUrl = event.target.result;
+          appendImageMessage(imageDataUrl, "user");
+
+          try {
+            const { data: { text } } = await Tesseract.recognize(imageDataUrl, 'ron+eng');
+            const ocrText = text.trim();
+            if (!ocrText) return;
+            ocrTextExtracted = ocrText;
+            sendOcrBtn.style.display = "inline-block";
+            console.log("Text extras din imagine:", ocrTextExtracted);
+          } catch (err) {
+            console.error("⚠️ Eroare OCR:", err);
+          }
+        };
+        reader.readAsDataURL(file);
+        imageUpload.value = "";
+      });
+
+      // Export CSV
+      function downloadCSVFromText(csvText) {
+        const plainText = csvText
+          .replace(/[*`#>\[\]]/g, '')       // elimină caractere markdown
+          .replace(/<\/?[^>]+(>|$)/g, '')   // elimină taguri HTML
+          .replace(/&nbsp;/g, ' ')          // spații speciale
+          .replace(/\n{2,}/g, '\n')         // newline dublu -> simplu
+          .trim();
+
+        const blob = new Blob([plainText], { type: "text/csv" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "export_ai.csv";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+
+        appendMessage("✅ CSV-ul simplificat din ultimul răspuns AI a fost descărcat.", "ai");
+      }
+    });
+  </script>
 </head>
 <body>
   <header class="navbar">
-    <div class="logo">⚑ ЮрГид</div>
+    <div class="logo">⚑ Buhguide</div>
     <nav>
-      <a href="../index.html">Home</a>
-      <div class="dropdown">
-
-    <a href="#" class="dropdown-toggle">Chats</a>
-    <div class="dropdown-menu">
-      <a href="chatbuhg.html">Бухгалтер</a>
-      <a href="chatjur.html">Юрист</a>
-    </div>
-  </div>
-      <a href="#">Profile</a>
-      <a href="#">How It Works</a>
-      <a href="#">About Us</a>
+      <a href="index.html">Acasă</a>
+      <a href="chat.html">JurGid</a>
+      <a href="chatContabil.html">ConGid</a>
+      <a href="#">Profil</a>
+      <a href="#">Cum funcționează</a>
+      <a href="#">Despre noi</a>
     </nav>
-
     <a href="../register/registration.html">
   <button class="login-btn">Log In</button>
 </a>
   </header>
+
   <div class="chat-layout">
     <aside class="sidebar">
       <div class="sidebar-scroll">
-        <button class="new-chat-btn">+ Начать чат</button>
-        <input class="search-input" placeholder="Поиск..." />
+        <button class="new-chat-btn">+ Începe un chat</button>
+        <input class="search-input" placeholder="Caută..." />
         <div class="category">
-          <h4>Чаты</h4>
+          <h4>Chat-uri</h4>
           <ul>
-            <li>Денежные переводы работникам</li>
-            <li>Налоги за декабрь</li>
-            <li>Анализ прибыли за 3 месяца</li>
-            <li>Как платить налоги?</li>
-            <li>Соотношение прибыли к тратам наглядно</li>
-            <li>Претензия арендодателю</li>
-            <li>Договор поставки</li>
-            <li>НДФЛ-отчет</li>
-            <li>Заявка на товарный знак</li>
-            <li>Соглашение о расторжении</li>
+            <li>Înregistrare și structură afacere</li>
+            <li>Contracte și acorduri</li>
+            <li>Documente de personal</li>
+            <li>Protejarea drepturilor</li>
+            <li>Cum să înregistrezi o PFA?</li>
+            <li>Reclamație către proprietar</li>
+            <li>Contract de livrare</li>
+            <li>Raport impozit pe venit</li>
+            <li>Cerere pentru marcă comercială</li>
+            <li>Acord de reziliere</li>
           </ul>
         </div>
       </div>
       <div class="profile">
-        <button>👤 User Profile</button>
+        <button>👤 Profil utilizator</button>
       </div>
     </aside>
 
     <main class="chat-area">
-      <div class="chat-title">Спроси Гида</div>
+      <div class="chat-title">Întreabă JurGhidul</div>
       <div class="chat-main">
+
         <div class="suggestions">
           <button>Что ты можешь делать?</button>
           <button>Какой проект самый успешный?</button>
