@@ -335,6 +335,8 @@ nav a:hover {
 }
 
 .message {
+  display: inline-block;     /* чтобы блок сжался по содержимому */
+  width: auto;               /* отменяем 100% ширины */
   margin: 10px;
   padding: 10px;
   border-radius: 8px;
@@ -344,6 +346,7 @@ nav a:hover {
 .message.user {
   background-color: #d9fdd3;
   align-self: flex-end;
+  text-align: right;
 }
 .message.assistant {
   background-color: #f1f0f0;
@@ -352,4 +355,21 @@ nav a:hover {
 .chat-main {
   display: flex;
   flex-direction: column;
+}
+/* Исходное состояние: видимые, с переходами */
+.chat-title,
+.suggestions {
+  opacity: 1;
+  max-height: 200px;       /* достаточно большое, чтобы уместить контент */
+  overflow: hidden;
+  transition: 
+    opacity 0.6s linear,     /* плавное затухание */
+    max-height 0.6s linear;  /* плавное сворачивание по высоте */
+}
+
+/* Скрытое состояние */
+.chat-title.hidden,
+.suggestions.hidden {
+  opacity: 0;
+  max-height: 0;
 }
