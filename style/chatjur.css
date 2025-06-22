@@ -342,6 +342,8 @@ nav a:hover {
   background-color: #d9fdd3;
   text-align: right;
   justify-items: right;
+  max-width: fit-content;
+  align-self: flex-end;
 }
 .message.assistant {
   background-color: #f1f0f0;
