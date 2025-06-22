@@ -1,27 +1,19 @@
-# Зависимости Node.js
+# Node.js
 node_modules/
 
-# Файлы с секретами
+# Секреты
 .env
 
 # Логи
 npm-debug.log*
-yarn-debug.log*
 *.log
 
-# Вывод сборки (если будете собирать фронтенд)
+# Сборки
 dist/
 build/
 
-# Конфиги редакторов и ОС
+# Настройки IDE/ОС
 .vscode/
 .DS_Store
 Thumbs.db
-ehthumbs.db
 *.swp
-
-# IDE-файлы (пример для JetBrains)
-.idea/
-
-# Любые временные файлы
-*.tmp
