@@ -1,12 +1,16 @@
+// cont_ai.js
 import fs from "fs";
 import path from "path";
+import dotenv from "dotenv";
 import Tesseract from "tesseract.js";
 import OpenAI from "openai";
 import * as XLSX from "xlsx";
 
+// Загружаем .env перед инициализацией OpenAI
+dotenv.config();
+
 const openai = new OpenAI({
-  apiKey:
-    "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",
+  apiKey: process.env.OPENAI_API_KEY,
 });
 
 async function processBon(imagePath) {
@@ -44,15 +48,10 @@ Răspunde doar cu JSON valid, fără alte simboluri sau blocuri de cod.
   let aiResponse = completion.choices[0].message.content;
   console.log("\n✅ Răspuns AI:\n", aiResponse);
 
-  // 🔧 Curățare bloc ```json ... ```
+  // Убираем ```json ... ```
   let cleanedJson = aiResponse.trim();
-  if (cleanedJson.startsWith("```json")) {
-    cleanedJson = cleanedJson
-      .replace(/^```json/, "")
-      .replace(/```$/, "")
-      .trim();
-  } else if (cleanedJson.startsWith("```")) {
-    cleanedJson = cleanedJson.replace(/^```/, "").replace(/```$/, "").trim();
+  if (cleanedJson.startsWith("```")) {
+    cleanedJson = cleanedJson.replace(/^```(?:json)?/, "").replace(/```$/, "").trim();
   }
 
   let parsed;
@@ -70,7 +69,7 @@ Răspunde doar cu JSON valid, fără alte simboluri sau blocuri de cod.
 function saveToExcelAndCSV(data) {
   const sheetData = [];
 
-  // Titluri
+  // Заголовки
   sheetData.push(["Magazin", data.denumirea_magazinului || ""]);
   sheetData.push(["Cod Fiscal", data.codul_fiscal || ""]);
   sheetData.push(["Dată", data.data_bonului || ""]);
@@ -83,8 +82,8 @@ function saveToExcelAndCSV(data) {
     data.produse.forEach((p) => {
       sheetData.push([
         p.nume_produs || "",
-        p.cantitate || "",
-        p.pret_unitar || "",
+        p.cantitate   || "",
+        p.pret_unitar|| "",
       ]);
     });
   }
@@ -102,11 +101,11 @@ function saveToExcelAndCSV(data) {
   console.log("📁 Fișier CSV salvat: bonuri.csv");
 }
 
-// === Rulare
+// === Точка входа
 const imagineBon = process.argv[2];
 if (!imagineBon) {
   console.log("❗ Te rog să oferi calea către o imagine:");
-  console.log("Ex: node cont_ai.js ./bon.png");
+  console.log("Ex: npm run ocr ./bon.png");
   process.exit(1);
 }
 
