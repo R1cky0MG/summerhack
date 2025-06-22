@@ -332,3 +332,22 @@ nav a:hover {
       color: #555;
       vertical-align: middle;
     }
+.message {
+  margin: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  max-width: 80%;
+  line-height: 1.4;
+}
+.message.user {
+  background-color: #d9fdd3;
+  align-self: flex-end;
+}
+.message.assistant {
+  background-color: #f1f0f0;
+  align-self: flex-start;
+}
+.chat-main {
+  display: flex;
+  flex-direction: column;
+}
