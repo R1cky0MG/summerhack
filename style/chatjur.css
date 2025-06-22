@@ -332,3 +332,41 @@ nav a:hover {
       color: #555;
       vertical-align: middle;
     }
+.message {
+  display: block;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 8px;
+}
+.message.user {
+  background-color: #d9fdd3;
+  text-align: right;
+  justify-items: right;
+  max-width: fit-content;
+  align-self: flex-end;
+}
+.message.assistant {
+  background-color: #f1f0f0;
+  align-self: flex-start;
+}
+.chat-main {
+  display: flex;
+  flex-direction: column;
+}
+/* Исходное состояние: видимые, с переходами */
+.chat-title,
+.suggestions {
+  opacity: 1;
+  max-height: 200px;     
+  overflow: hidden;
+  transition: 
+  opacity 0.4s linear,    
+  max-height 0.4s linear; 
+}
+
+/* Скрытое состояние */
+.chat-title.hidden,
+.suggestions.hidden {
+  opacity: 0;
+  max-height: 0;
+}

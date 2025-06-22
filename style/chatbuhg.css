@@ -443,3 +443,42 @@ nav {
   color: #555;
   vertical-align: middle;
 }
+
+.message {
+  display: inline-block;    
+  width: auto;               
+  margin: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  max-width: 80%;
+  line-height: 1.4;
+}
+.message.user {
+  background-color: #d9fdd3;
+  align-self: flex-end;
+  text-align: right;
+}
+.message.assistant {
+  background-color: #f1f0f0;
+  align-self: flex-start;
+}
+.chat-main {
+  display: flex;
+  flex-direction: column;
+}
+.chat-title,
+.suggestions {
+  opacity: 1;
+  max-height: 200px;       /* достаточно большое, чтобы уместить контент */
+  overflow: hidden;
+  transition: 
+    opacity 0.6s linear,     /* плавное затухание */
+    max-height 0.6s linear;  /* плавное сворачивание по высоте */
+}
+
+/* Скрытое состояние */
+.chat-title.hidden,
+.suggestions.hidden {
+  opacity: 0;
+  max-height: 0;
+}

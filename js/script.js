@@ -6,19 +6,28 @@ document.addEventListener("DOMContentLoaded", () => {
   const input    = document.querySelector(".input-area input");
   const button   = document.querySelector(".input-area button");
   const chatMain = document.querySelector(".chat-main");
+  const messages = document.querySelector(".messages");
+  const chatTitle   = document.querySelector(".chat-title");
+  const suggestions = document.querySelector(".suggestions");
 
+    function hideIntro() {
+    chatTitle.classList.add("hidden");
+    suggestions.classList.add("hidden");
+  }
   // Функция для вывода сообщения в чат
   function appendMessage(role, text) {
+  if (!chatTitle.classList.contains("hidden")) {
+      hideIntro();
+    }
     const msg = document.createElement("div");
     msg.className = `message ${role}`;
     msg.textContent = text;
-    chatMain.appendChild(msg);
-    // Автопрокрутка в конец
-    chatMain.scrollTop = chatMain.scrollHeight;
+    messages.appendChild(msg);                // ← используем контейнер
+    messages.scrollTop = messages.scrollHeight;
   }
-
   // Обработчик отправки
-  async function sendToAI(question) {
+  async function sendToAI(question)
+   {
     appendMessage("user", question);
     try {
       const res = await fetch(API_URL, { 
@@ -38,8 +47,8 @@ document.addEventListener("DOMContentLoaded", () => {
   button.addEventListener("click", () => {
     const q = input.value.trim();
     if (!q) return;
-    sendToAI(q);
-    input.value = "";
+      sendToAI(q);
+      input.value = "";
   });
 
   // Enter в поле ввода
@@ -47,8 +56,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.key === "Enter") {
       const q = input.value.trim();
       if (!q) return;
-      sendToAI(q);
-      input.value = "";
+        sendToAI(q);
+        input.value = "";
     }
   });
 });

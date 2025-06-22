@@ -16,6 +16,7 @@ app.use(express.static(root));                 // отдаём index.html
 app.use('/pages', express.static(path.join(root, 'pages')));
 app.use('/js', express.static(path.join(root, 'js')));
 app.use('/style',  express.static(path.join(root, 'style')));
+app.use('/register', express.static(path.join(root, 'register')));
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 

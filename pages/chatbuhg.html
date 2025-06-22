@@ -270,7 +270,9 @@ const openai = new OpenAI({
       <a href="#">Cum funcționează</a>
       <a href="#">Despre noi</a>
     </nav>
-    <button class="login-btn">Autentificare</button>
+    <a href="../register/registration.html">
+  <button class="login-btn">Log In</button>
+</a>
   </header>
 
   <div class="chat-layout">
@@ -302,13 +304,16 @@ const openai = new OpenAI({
     <main class="chat-area">
       <div class="chat-title">Întreabă JurGhidul</div>
       <div class="chat-main">
-        <div id="chat"></div>
-        <div id="input-area">
-          <textarea id="intrebare" placeholder="Scrie un mesaj..."></textarea>
-          <input type="file" id="image-upload" accept="image/*" title="Încarcă o imagine" />
-          <button id="send-btn">Trimite</button>
-          <button id="send-ocr-text-btn" title="Trimite textul extras din imagine">Trimite textul extras</button>
-          <button id="export-ai-csv-btn" title="Export AI CSV">Export CSV</button>
+
+        <div class="suggestions">
+          <button>Что ты можешь делать?</button>
+          <button>Какой проект самый успешный?</button>
+          <button>Что вызывает риски сейчас?</button>
+        </div>
+        <div class="messages"></div>  
+        <div class="input-area">
+          <input type="text" placeholder="Спросите что угодно о финансах" />
+          <button>➤</button>
         </div>
       </div>
     </main>
